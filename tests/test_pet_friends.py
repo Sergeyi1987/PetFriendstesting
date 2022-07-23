@@ -1,3 +1,4 @@
+import os
 from api import PetFriends
 from settings import valid_email, valid_password
 
@@ -21,9 +22,9 @@ def test_add_new_pet_with_valid_data(name='Барбоскин', animal_type='д�
 
     pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
 
-        _, auth_key = pf.get_api_key(valid_email, valid_password)
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
 
-       status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
+    status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
 
     assert status == 200
     assert result['name'] == name
@@ -35,7 +36,7 @@ def test_successful_delete_self_pet():
     _, my_pets = pf.get_list_of_pets(auth_key, "my_pets")
 
     if len(my_pets['pets']) == 0:
-        pf.add_new_pet(auth_key, "Суперкот", "кот", "3", "cat1.jpg")
+        pf.add_new_pet(auth_key, "Суперкот", "кот", "3", images"cat1.jpg")
         _, my_pets = pf.get_list_of_pets(auth_key, "my_pets")
 
     pet_id = my_pets['pets'][0]['id']
